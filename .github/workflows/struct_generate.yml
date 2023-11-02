@@ -56,6 +56,7 @@ jobs:
 
       - name: Register Short Commit Hash
         id: short_commit_hash
+        working-directory: repo
         run: |
           echo "short_commit_hash=$(cat SCHEMA_COMMIT | head -c 7)" >> $GITHUB_ENV
       

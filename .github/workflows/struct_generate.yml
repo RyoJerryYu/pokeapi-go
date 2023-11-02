@@ -63,8 +63,8 @@ jobs:
         with:
           path: repo
           commit-message: "[Bot] Update structs for commit ${{ env.commit_hash }}"
-          title: 'Update structs for commit ${{ env.commit_hash }}'
-          body: 'Update structs for commit https://github.com/jlord/sheetsee.js/commit/${{ env.commit_hash }} .'
+          title: 'Update structs for commit https://github.com/PokeAPI/api-data/commit/${{ env.commit_hash }} .'
+          body: 'Update structs for commit https://github.com/PokeAPI/api-data/commit/${{ env.commit_hash }} .'
           branch: external/generate-structs
           base: master
           labels: 'external'

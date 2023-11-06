@@ -3,7 +3,7 @@ name: Generate Struct
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: '0 0 12 * *' # Every day at 12pm UTC
+    - cron: '0 12 * * *' # Every day at 12pm UTC
 
 jobs:
   check_schema_update:
@@ -41,8 +41,11 @@ jobs:
           fetch-depth: 1
           path: api-data
           repository: PokeAPI/api-data
-      
-      - uses: actions/setup-go@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          cache-dependency-path: repo/go.mod
 
       - name: Fetch Schema Master Commit
         working-directory: repo

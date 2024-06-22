@@ -4,23 +4,6 @@ package structs
 
 import "encoding/json"
 
-type Gender struct {
-	ID                    int64  `json:"id"`
-	Name                  string `json:"name"`
-	PokemonSpeciesDetails []struct {
-		PokemonSpecies NamedApiResource `json:"pokemon_species"`
-		Rate           int64            `json:"rate"`
-	} `json:"pokemon_species_details"`
-	RequiredForEvolution []NamedApiResource `json:"required_for_evolution"`
-}
-
-type EncounterMethod struct {
-	ID    int64  `json:"id"`
-	Name  string `json:"name"`
-	Names []Name `json:"names"`
-	Order int64  `json:"order"`
-}
-
 type PokemonForm struct {
 	FormName     string           `json:"form_name"`
 	FormNames    []Name           `json:"form_names"`
@@ -50,77 +33,28 @@ type PokemonForm struct {
 	VersionGroup NamedApiResource `json:"version_group"`
 }
 
-type SuperContestEffect struct {
-	Appeal            int64              `json:"appeal"`
-	FlavorTextEntries []FlavorText       `json:"flavor_text_entries"`
-	ID                int64              `json:"id"`
-	Moves             []NamedApiResource `json:"moves"`
+type VersionGameIndex struct {
+	GameIndex int64            `json:"game_index"`
+	Version   NamedApiResource `json:"version"`
 }
 
-type Pokedex struct {
-	Descriptions   []Description `json:"descriptions"`
-	ID             int64         `json:"id"`
-	IsMainSeries   bool          `json:"is_main_series"`
-	Name           string        `json:"name"`
-	Names          []Name        `json:"names"`
-	PokemonEntries []struct {
-		EntryNumber    int64            `json:"entry_number"`
-		PokemonSpecies NamedApiResource `json:"pokemon_species"`
-	} `json:"pokemon_entries"`
-	Region        *NamedApiResource  `json:"region"`
-	VersionGroups []NamedApiResource `json:"version_groups"`
-}
-
-type PokemonSpecies struct {
-	BaseHappiness      *int64             `json:"base_happiness"`
-	CaptureRate        int64              `json:"capture_rate"`
-	Color              NamedApiResource   `json:"color"`
-	EggGroups          []NamedApiResource `json:"egg_groups"`
-	EvolutionChain     ApiResource        `json:"evolution_chain"`
-	EvolvesFromSpecies *NamedApiResource  `json:"evolves_from_species"`
-	FlavorTextEntries  []struct {
-		FlavorText string           `json:"flavor_text"`
-		Language   NamedApiResource `json:"language"`
-		Version    NamedApiResource `json:"version"`
-	} `json:"flavor_text_entries"`
-	FormDescriptions []Description `json:"form_descriptions"`
-	FormsSwitchable  bool          `json:"forms_switchable"`
-	GenderRate       int64         `json:"gender_rate"`
-	Genera           []struct {
-		Genus    string           `json:"genus"`
-		Language NamedApiResource `json:"language"`
-	} `json:"genera"`
-	Generation           NamedApiResource  `json:"generation"`
-	GrowthRate           NamedApiResource  `json:"growth_rate"`
-	Habitat              *NamedApiResource `json:"habitat"`
-	HasGenderDifferences bool              `json:"has_gender_differences"`
-	HatchCounter         *int64            `json:"hatch_counter"`
-	ID                   int64             `json:"id"`
-	IsBaby               bool              `json:"is_baby"`
-	IsLegendary          bool              `json:"is_legendary"`
-	IsMythical           bool              `json:"is_mythical"`
-	Name                 string            `json:"name"`
-	Names                []Name            `json:"names"`
-	Order                int64             `json:"order"`
-	PalParkEncounters    []struct {
-		Area      NamedApiResource `json:"area"`
-		BaseScore int64            `json:"base_score"`
-		Rate      int64            `json:"rate"`
-	} `json:"pal_park_encounters"`
-	PokedexNumbers []struct {
-		EntryNumber int64            `json:"entry_number"`
-		Pokedex     NamedApiResource `json:"pokedex"`
-	} `json:"pokedex_numbers"`
-	Shape     *NamedApiResource `json:"shape"`
-	Varieties []struct {
-		IsDefault bool             `json:"is_default"`
-		Pokemon   NamedApiResource `json:"pokemon"`
-	} `json:"varieties"`
-}
-
-type Effect struct {
-	Effect   string           `json:"effect"`
-	Language NamedApiResource `json:"language"`
+type Nature struct {
+	DecreasedStat              *NamedApiResource `json:"decreased_stat"`
+	HatesFlavor                *NamedApiResource `json:"hates_flavor"`
+	ID                         int64             `json:"id"`
+	IncreasedStat              *NamedApiResource `json:"increased_stat"`
+	LikesFlavor                *NamedApiResource `json:"likes_flavor"`
+	MoveBattleStylePreferences []struct {
+		HighHpPreference int64            `json:"high_hp_preference"`
+		LowHpPreference  int64            `json:"low_hp_preference"`
+		MoveBattleStyle  NamedApiResource `json:"move_battle_style"`
+	} `json:"move_battle_style_preferences"`
+	Name                  string `json:"name"`
+	Names                 []Name `json:"names"`
+	PokeathlonStatChanges []struct {
+		MaxChange      int64            `json:"max_change"`
+		PokeathlonStat NamedApiResource `json:"pokeathlon_stat"`
+	} `json:"pokeathlon_stat_changes"`
 }
 
 type Type struct {
@@ -156,10 +90,11 @@ type Type struct {
 	} `json:"pokemon"`
 }
 
-type VerboseEffect struct {
-	Effect      string           `json:"effect"`
-	Language    NamedApiResource `json:"language"`
-	ShortEffect string           `json:"short_effect"`
+type PokemonColor struct {
+	ID             int64              `json:"id"`
+	Name           string             `json:"name"`
+	Names          []Name             `json:"names"`
+	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
 }
 
 type PokeathlonStat struct {
@@ -178,16 +113,37 @@ type PokeathlonStat struct {
 	Names []Name `json:"names"`
 }
 
-type Version struct {
-	ID           int64            `json:"id"`
-	Name         string           `json:"name"`
-	Names        []Name           `json:"names"`
-	VersionGroup NamedApiResource `json:"version_group"`
+type BerryFirmness struct {
+	Berries []NamedApiResource `json:"berries"`
+	ID      int64              `json:"id"`
+	Name    string             `json:"name"`
+	Names   []Name             `json:"names"`
 }
 
-type FlavorText struct {
-	FlavorText string           `json:"flavor_text"`
-	Language   NamedApiResource `json:"language"`
+type Characteristic struct {
+	Descriptions   []Description    `json:"descriptions"`
+	GeneModulo     int64            `json:"gene_modulo"`
+	HighestStat    NamedApiResource `json:"highest_stat"`
+	ID             int64            `json:"id"`
+	PossibleValues []int64          `json:"possible_values"`
+}
+
+type Region struct {
+	ID             int64              `json:"id"`
+	Locations      []NamedApiResource `json:"locations"`
+	MainGeneration *NamedApiResource  `json:"main_generation"`
+	Name           string             `json:"name"`
+	Names          []Name             `json:"names"`
+	Pokedexes      []NamedApiResource `json:"pokedexes"`
+	VersionGroups  []NamedApiResource `json:"version_groups"`
+}
+
+type MoveDamageClass struct {
+	Descriptions []Description      `json:"descriptions"`
+	ID           int64              `json:"id"`
+	Moves        []NamedApiResource `json:"moves"`
+	Name         string             `json:"name"`
+	Names        []Name             `json:"names"`
 }
 
 type Move struct {
@@ -257,280 +213,18 @@ type Move struct {
 	Type               NamedApiResource `json:"type"`
 }
 
-type LocationArea struct {
-	EncounterMethodRates []struct {
-		EncounterMethod NamedApiResource `json:"encounter_method"`
-		VersionDetails  []struct {
-			Rate    int64            `json:"rate"`
-			Version NamedApiResource `json:"version"`
-		} `json:"version_details"`
-	} `json:"encounter_method_rates"`
-	GameIndex         int64            `json:"game_index"`
-	ID                int64            `json:"id"`
-	Location          NamedApiResource `json:"location"`
-	Name              string           `json:"name"`
-	Names             []Name           `json:"names"`
-	PokemonEncounters []struct {
-		Pokemon        NamedApiResource         `json:"pokemon"`
-		VersionDetails []VersionEncounterDetail `json:"version_details"`
-	} `json:"pokemon_encounters"`
+type NamedApiResourceList struct {
+	Count    int64              `json:"count"`
+	Next     *string            `json:"next"`
+	Previous *string            `json:"previous"`
+	Results  []NamedApiResource `json:"results"`
 }
 
-type Item struct {
-	Attributes        []NamedApiResource       `json:"attributes"`
-	BabyTriggerFor    *ApiResource             `json:"baby_trigger_for"`
-	Category          NamedApiResource         `json:"category"`
-	Cost              int64                    `json:"cost"`
-	EffectEntries     []VerboseEffect          `json:"effect_entries"`
-	FlavorTextEntries []VersionGroupFlavorText `json:"flavor_text_entries"`
-	FlingEffect       *NamedApiResource        `json:"fling_effect"`
-	FlingPower        *int64                   `json:"fling_power"`
-	GameIndices       []GenerationGameIndex    `json:"game_indices"`
-	HeldByPokemon     []struct {
-		Pokemon        NamedApiResource `json:"pokemon"`
-		VersionDetails []struct {
-			Rarity  int64            `json:"rarity"`
-			Version NamedApiResource `json:"version"`
-		} `json:"version_details"`
-	} `json:"held_by_pokemon"`
-	ID       int64                  `json:"id"`
-	Machines []MachineVersionDetail `json:"machines"`
-	Name     string                 `json:"name"`
-	Names    []Name                 `json:"names"`
-	Sprites  struct {
-		Default *string `json:"default"`
-	} `json:"sprites"`
-}
-
-type ApiResourceList struct {
-	Count    int64         `json:"count"`
-	Next     *string       `json:"next"`
-	Previous *string       `json:"previous"`
-	Results  []ApiResource `json:"results"`
-}
-
-type Machine struct {
+type Version struct {
 	ID           int64            `json:"id"`
-	Item         NamedApiResource `json:"item"`
-	Move         NamedApiResource `json:"move"`
+	Name         string           `json:"name"`
+	Names        []Name           `json:"names"`
 	VersionGroup NamedApiResource `json:"version_group"`
-}
-
-type EncounterConditionValue struct {
-	Condition NamedApiResource `json:"condition"`
-	ID        int64            `json:"id"`
-	Name      string           `json:"name"`
-	Names     []Name           `json:"names"`
-}
-
-type EncounterCondition struct {
-	ID     int64              `json:"id"`
-	Name   string             `json:"name"`
-	Names  []Name             `json:"names"`
-	Values []NamedApiResource `json:"values"`
-}
-
-type MoveDamageClass struct {
-	Descriptions []Description      `json:"descriptions"`
-	ID           int64              `json:"id"`
-	Moves        []NamedApiResource `json:"moves"`
-	Name         string             `json:"name"`
-	Names        []Name             `json:"names"`
-}
-
-type Berry struct {
-	Firmness NamedApiResource `json:"firmness"`
-	Flavors  []struct {
-		Flavor  NamedApiResource `json:"flavor"`
-		Potency int64            `json:"potency"`
-	} `json:"flavors"`
-	GrowthTime       int64            `json:"growth_time"`
-	ID               int64            `json:"id"`
-	Item             NamedApiResource `json:"item"`
-	MaxHarvest       int64            `json:"max_harvest"`
-	Name             string           `json:"name"`
-	NaturalGiftPower int64            `json:"natural_gift_power"`
-	NaturalGiftType  NamedApiResource `json:"natural_gift_type"`
-	Size             int64            `json:"size"`
-	Smoothness       int64            `json:"smoothness"`
-	SoilDryness      int64            `json:"soil_dryness"`
-}
-
-type Location struct {
-	Areas       []NamedApiResource    `json:"areas"`
-	GameIndices []GenerationGameIndex `json:"game_indices"`
-	ID          int64                 `json:"id"`
-	Name        string                `json:"name"`
-	Names       []Name                `json:"names"`
-	Region      *NamedApiResource     `json:"region"`
-}
-
-type Encounter struct {
-	Chance          int64              `json:"chance"`
-	ConditionValues []NamedApiResource `json:"condition_values"`
-	MaxLevel        int64              `json:"max_level"`
-	Method          NamedApiResource   `json:"method"`
-	MinLevel        int64              `json:"min_level"`
-}
-
-type ItemAttribute struct {
-	Descriptions []Description      `json:"descriptions"`
-	ID           int64              `json:"id"`
-	Items        []NamedApiResource `json:"items"`
-	Name         string             `json:"name"`
-	Names        []Name             `json:"names"`
-}
-
-type MoveAilment struct {
-	ID    int64              `json:"id"`
-	Moves []NamedApiResource `json:"moves"`
-	Name  string             `json:"name"`
-	Names []Name             `json:"names"`
-}
-
-type MoveAilment1 struct {
-	ID    int64              `json:"id"`
-	Moves []NamedApiResource `json:"moves"`
-	Name  string             `json:"name"`
-	Names []Name             `json:"names"`
-}
-
-type PokemonShape struct {
-	AwesomeNames []struct {
-		AwesomeName string           `json:"awesome_name"`
-		Language    NamedApiResource `json:"language"`
-	} `json:"awesome_names"`
-	ID             int64              `json:"id"`
-	Name           string             `json:"name"`
-	Names          []Name             `json:"names"`
-	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
-}
-
-type ItemPocket struct {
-	Categories []NamedApiResource `json:"categories"`
-	ID         int64              `json:"id"`
-	Name       string             `json:"name"`
-	Names      []Name             `json:"names"`
-}
-
-type ItemCategory struct {
-	ID     int64              `json:"id"`
-	Items  []NamedApiResource `json:"items"`
-	Name   string             `json:"name"`
-	Names  []Name             `json:"names"`
-	Pocket NamedApiResource   `json:"pocket"`
-}
-
-type ContestEffect struct {
-	Appeal            int64        `json:"appeal"`
-	EffectEntries     []Effect     `json:"effect_entries"`
-	FlavorTextEntries []FlavorText `json:"flavor_text_entries"`
-	ID                int64        `json:"id"`
-	Jam               int64        `json:"jam"`
-}
-
-type EvolutionChain struct {
-	BabyTriggerItem *NamedApiResource `json:"baby_trigger_item"`
-	Chain           struct {
-		EvolutionDetails []json.RawMessage `json:"evolution_details"`
-		EvolvesTo        []struct {
-			EvolutionDetails []struct {
-				Gender                *int64            `json:"gender"`
-				HeldItem              *NamedApiResource `json:"held_item"`
-				Item                  *NamedApiResource `json:"item"`
-				KnownMove             *NamedApiResource `json:"known_move"`
-				KnownMoveType         *NamedApiResource `json:"known_move_type"`
-				Location              *NamedApiResource `json:"location"`
-				MinAffection          *int64            `json:"min_affection"`
-				MinBeauty             *int64            `json:"min_beauty"`
-				MinHappiness          *int64            `json:"min_happiness"`
-				MinLevel              *int64            `json:"min_level"`
-				NeedsOverworldRain    bool              `json:"needs_overworld_rain"`
-				PartySpecies          *NamedApiResource `json:"party_species"`
-				PartyType             *NamedApiResource `json:"party_type"`
-				RelativePhysicalStats *int64            `json:"relative_physical_stats"`
-				TimeOfDay             string            `json:"time_of_day"`
-				TradeSpecies          *NamedApiResource `json:"trade_species"`
-				Trigger               NamedApiResource  `json:"trigger"`
-				TurnUpsideDown        bool              `json:"turn_upside_down"`
-			} `json:"evolution_details"`
-			EvolvesTo []struct {
-				EvolutionDetails []struct {
-					Gender                *int64            `json:"gender"`
-					HeldItem              *NamedApiResource `json:"held_item"`
-					Item                  *NamedApiResource `json:"item"`
-					KnownMove             *NamedApiResource `json:"known_move"`
-					KnownMoveType         struct{}          `json:"known_move_type"`
-					Location              *NamedApiResource `json:"location"`
-					MinAffection          struct{}          `json:"min_affection"`
-					MinBeauty             struct{}          `json:"min_beauty"`
-					MinHappiness          *int64            `json:"min_happiness"`
-					MinLevel              *int64            `json:"min_level"`
-					NeedsOverworldRain    bool              `json:"needs_overworld_rain"`
-					PartySpecies          struct{}          `json:"party_species"`
-					PartyType             struct{}          `json:"party_type"`
-					RelativePhysicalStats struct{}          `json:"relative_physical_stats"`
-					TimeOfDay             string            `json:"time_of_day"`
-					TradeSpecies          struct{}          `json:"trade_species"`
-					Trigger               NamedApiResource  `json:"trigger"`
-					TurnUpsideDown        bool              `json:"turn_upside_down"`
-				} `json:"evolution_details"`
-				EvolvesTo []json.RawMessage `json:"evolves_to"`
-				IsBaby    bool              `json:"is_baby"`
-				Species   NamedApiResource  `json:"species"`
-			} `json:"evolves_to"`
-			IsBaby  bool             `json:"is_baby"`
-			Species NamedApiResource `json:"species"`
-		} `json:"evolves_to"`
-		IsBaby  bool             `json:"is_baby"`
-		Species NamedApiResource `json:"species"`
-	} `json:"chain"`
-	ID int64 `json:"id"`
-}
-
-type NamedApiResource struct {
-	Name string `json:"name"`
-	URL  string `json:"url"`
-}
-
-type BerryFlavor struct {
-	Berries []struct {
-		Berry   NamedApiResource `json:"berry"`
-		Potency int64            `json:"potency"`
-	} `json:"berries"`
-	ContestType NamedApiResource `json:"contest_type"`
-	ID          int64            `json:"id"`
-	Name        string           `json:"name"`
-	Names       []Name           `json:"names"`
-}
-
-type Name struct {
-	Language NamedApiResource `json:"language"`
-	Name     string           `json:"name"`
-}
-
-type BerryFirmness struct {
-	Berries []NamedApiResource `json:"berries"`
-	ID      int64              `json:"id"`
-	Name    string             `json:"name"`
-	Names   []Name             `json:"names"`
-}
-
-type Language struct {
-	ID       int64  `json:"id"`
-	Iso3166  string `json:"iso3166"`
-	Iso639   string `json:"iso639"`
-	Name     string `json:"name"`
-	Names    []Name `json:"names"`
-	Official bool   `json:"official"`
-}
-
-type Characteristic struct {
-	Descriptions   []Description    `json:"descriptions"`
-	GeneModulo     int64            `json:"gene_modulo"`
-	HighestStat    NamedApiResource `json:"highest_stat"`
-	ID             int64            `json:"id"`
-	PossibleValues []int64          `json:"possible_values"`
 }
 
 type EvolutionTrigger struct {
@@ -540,16 +234,11 @@ type EvolutionTrigger struct {
 	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
 }
 
-type PokemonColor struct {
-	ID             int64              `json:"id"`
-	Name           string             `json:"name"`
-	Names          []Name             `json:"names"`
-	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
-}
-
-type Description struct {
-	Description string           `json:"description"`
-	Language    NamedApiResource `json:"language"`
+type EncounterConditionValue struct {
+	Condition NamedApiResource `json:"condition"`
+	ID        int64            `json:"id"`
+	Name      string           `json:"name"`
+	Names     []Name           `json:"names"`
 }
 
 type GrowthRate struct {
@@ -564,116 +253,10 @@ type GrowthRate struct {
 	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
 }
 
-type NamedApiResourceList struct {
-	Count    int64              `json:"count"`
-	Next     *string            `json:"next"`
-	Previous *string            `json:"previous"`
-	Results  []NamedApiResource `json:"results"`
-}
-
-type Generation struct {
-	Abilities      []NamedApiResource `json:"abilities"`
-	ID             int64              `json:"id"`
-	MainRegion     NamedApiResource   `json:"main_region"`
-	Moves          []NamedApiResource `json:"moves"`
-	Name           string             `json:"name"`
-	Names          []Name             `json:"names"`
-	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
-	Types          []NamedApiResource `json:"types"`
-	VersionGroups  []NamedApiResource `json:"version_groups"`
-}
-
-type VersionGroup struct {
-	Generation       NamedApiResource   `json:"generation"`
-	ID               int64              `json:"id"`
-	MoveLearnMethods []NamedApiResource `json:"move_learn_methods"`
-	Name             string             `json:"name"`
-	Order            int64              `json:"order"`
-	Pokedexes        []NamedApiResource `json:"pokedexes"`
-	Regions          []NamedApiResource `json:"regions"`
-	Versions         []NamedApiResource `json:"versions"`
-}
-
-type MachineVersionDetail struct {
-	Machine      ApiResource      `json:"machine"`
-	VersionGroup NamedApiResource `json:"version_group"`
-}
-
-type VersionGroupFlavorText struct {
-	Language     NamedApiResource `json:"language"`
-	Text         string           `json:"text"`
-	VersionGroup NamedApiResource `json:"version_group"`
-}
-
-type EggGroup struct {
-	ID             int64              `json:"id"`
-	Name           string             `json:"name"`
-	Names          []Name             `json:"names"`
-	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
-}
-
-type Ability struct {
-	EffectChanges []struct {
-		EffectEntries []Effect         `json:"effect_entries"`
-		VersionGroup  NamedApiResource `json:"version_group"`
-	} `json:"effect_changes"`
-	EffectEntries     []VerboseEffect `json:"effect_entries"`
-	FlavorTextEntries []struct {
-		FlavorText   string           `json:"flavor_text"`
-		Language     NamedApiResource `json:"language"`
-		VersionGroup NamedApiResource `json:"version_group"`
-	} `json:"flavor_text_entries"`
-	Generation   NamedApiResource `json:"generation"`
-	ID           int64            `json:"id"`
-	IsMainSeries bool             `json:"is_main_series"`
-	Name         string           `json:"name"`
-	Names        []Name           `json:"names"`
-	Pokemon      []struct {
-		IsHidden bool             `json:"is_hidden"`
-		Pokemon  NamedApiResource `json:"pokemon"`
-		Slot     int64            `json:"slot"`
-	} `json:"pokemon"`
-}
-
 type MoveBattleStyle struct {
 	ID    int64  `json:"id"`
 	Name  string `json:"name"`
 	Names []Name `json:"names"`
-}
-
-type ContestType struct {
-	BerryFlavor NamedApiResource `json:"berry_flavor"`
-	ID          int64            `json:"id"`
-	Name        string           `json:"name"`
-	Names       []struct {
-		Color    string           `json:"color"`
-		Language NamedApiResource `json:"language"`
-		Name     string           `json:"name"`
-	} `json:"names"`
-}
-
-type GenerationGameIndex struct {
-	GameIndex  int64            `json:"game_index"`
-	Generation NamedApiResource `json:"generation"`
-}
-
-type Nature struct {
-	DecreasedStat              *NamedApiResource `json:"decreased_stat"`
-	HatesFlavor                *NamedApiResource `json:"hates_flavor"`
-	ID                         int64             `json:"id"`
-	IncreasedStat              *NamedApiResource `json:"increased_stat"`
-	LikesFlavor                *NamedApiResource `json:"likes_flavor"`
-	MoveBattleStylePreferences []struct {
-		HighHpPreference int64            `json:"high_hp_preference"`
-		LowHpPreference  int64            `json:"low_hp_preference"`
-		MoveBattleStyle  NamedApiResource `json:"move_battle_style"`
-	} `json:"move_battle_style_preferences"`
-	Name                  string `json:"name"`
-	Names                 []Name `json:"names"`
-	PokeathlonStatChanges []struct {
-		MaxChange      int64            `json:"max_change"`
-		PokeathlonStat NamedApiResource `json:"pokeathlon_stat"`
-	} `json:"pokeathlon_stat_changes"`
 }
 
 type MoveLearnMethod struct {
@@ -684,21 +267,12 @@ type MoveLearnMethod struct {
 	VersionGroups []NamedApiResource `json:"version_groups"`
 }
 
-type ItemFlingEffect struct {
-	EffectEntries []Effect           `json:"effect_entries"`
-	ID            int64              `json:"id"`
-	Items         []NamedApiResource `json:"items"`
-	Name          string             `json:"name"`
-}
-
-type Region struct {
-	ID             int64              `json:"id"`
-	Locations      []NamedApiResource `json:"locations"`
-	MainGeneration *NamedApiResource  `json:"main_generation"`
-	Name           string             `json:"name"`
-	Names          []Name             `json:"names"`
-	Pokedexes      []NamedApiResource `json:"pokedexes"`
-	VersionGroups  []NamedApiResource `json:"version_groups"`
+type ItemAttribute struct {
+	Descriptions []Description      `json:"descriptions"`
+	ID           int64              `json:"id"`
+	Items        []NamedApiResource `json:"items"`
+	Name         string             `json:"name"`
+	Names        []Name             `json:"names"`
 }
 
 type MoveTarget struct {
@@ -709,107 +283,11 @@ type MoveTarget struct {
 	Names        []Name             `json:"names"`
 }
 
-type PalParkArea struct {
-	ID                int64  `json:"id"`
-	Name              string `json:"name"`
-	Names             []Name `json:"names"`
-	PokemonEncounters []struct {
-		BaseScore      int64            `json:"base_score"`
-		PokemonSpecies NamedApiResource `json:"pokemon_species"`
-		Rate           int64            `json:"rate"`
-	} `json:"pokemon_encounters"`
-}
-
-type ApiResource struct {
-	URL string `json:"url"`
-}
-
-type Stat struct {
-	AffectingMoves struct {
-		Decrease []struct {
-			Change int64            `json:"change"`
-			Move   NamedApiResource `json:"move"`
-		} `json:"decrease"`
-		Increase []struct {
-			Change int64            `json:"change"`
-			Move   NamedApiResource `json:"move"`
-		} `json:"increase"`
-	} `json:"affecting_moves"`
-	AffectingNatures struct {
-		Decrease []NamedApiResource `json:"decrease"`
-		Increase []NamedApiResource `json:"increase"`
-	} `json:"affecting_natures"`
-	Characteristics []ApiResource     `json:"characteristics"`
-	GameIndex       int64             `json:"game_index"`
-	ID              int64             `json:"id"`
-	IsBattleOnly    bool              `json:"is_battle_only"`
-	MoveDamageClass *NamedApiResource `json:"move_damage_class"`
-	Name            string            `json:"name"`
-	Names           []Name            `json:"names"`
-}
-
-type VersionEncounterDetail struct {
-	EncounterDetails []Encounter      `json:"encounter_details"`
-	MaxChance        int64            `json:"max_chance"`
-	Version          NamedApiResource `json:"version"`
-}
-
-type V2 struct {
-	Ability                 string `json:"ability"`
-	Berry                   string `json:"berry"`
-	BerryFirmness           string `json:"berry-firmness"`
-	BerryFlavor             string `json:"berry-flavor"`
-	Characteristic          string `json:"characteristic"`
-	ContestEffect           string `json:"contest-effect"`
-	ContestType             string `json:"contest-type"`
-	EggGroup                string `json:"egg-group"`
-	EncounterCondition      string `json:"encounter-condition"`
-	EncounterConditionValue string `json:"encounter-condition-value"`
-	EncounterMethod         string `json:"encounter-method"`
-	EvolutionChain          string `json:"evolution-chain"`
-	EvolutionTrigger        string `json:"evolution-trigger"`
-	Gender                  string `json:"gender"`
-	Generation              string `json:"generation"`
-	GrowthRate              string `json:"growth-rate"`
-	Item                    string `json:"item"`
-	ItemAttribute           string `json:"item-attribute"`
-	ItemCategory            string `json:"item-category"`
-	ItemFlingEffect         string `json:"item-fling-effect"`
-	ItemPocket              string `json:"item-pocket"`
-	Language                string `json:"language"`
-	Location                string `json:"location"`
-	LocationArea            string `json:"location-area"`
-	Machine                 string `json:"machine"`
-	Move                    string `json:"move"`
-	MoveAilment             string `json:"move-ailment"`
-	MoveBattleStyle         string `json:"move-battle-style"`
-	MoveCategory            string `json:"move-category"`
-	MoveDamageClass         string `json:"move-damage-class"`
-	MoveLearnMethod         string `json:"move-learn-method"`
-	MoveTarget              string `json:"move-target"`
-	Nature                  string `json:"nature"`
-	PalParkArea             string `json:"pal-park-area"`
-	PokeathlonStat          string `json:"pokeathlon-stat"`
-	Pokedex                 string `json:"pokedex"`
-	Pokemon                 string `json:"pokemon"`
-	PokemonColor            string `json:"pokemon-color"`
-	PokemonForm             string `json:"pokemon-form"`
-	PokemonHabitat          string `json:"pokemon-habitat"`
-	PokemonShape            string `json:"pokemon-shape"`
-	PokemonSpecies          string `json:"pokemon-species"`
-	Region                  string `json:"region"`
-	Stat                    string `json:"stat"`
-	SuperContestEffect      string `json:"super-contest-effect"`
-	Type                    string `json:"type"`
-	Version                 string `json:"version"`
-	VersionGroup            string `json:"version-group"`
-}
-
-type PokemonHabitat struct {
-	ID             int64              `json:"id"`
-	Name           string             `json:"name"`
-	Names          []Name             `json:"names"`
-	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
+type EncounterCondition struct {
+	ID     int64              `json:"id"`
+	Name   string             `json:"name"`
+	Names  []Name             `json:"names"`
+	Values []NamedApiResource `json:"values"`
 }
 
 type Encounters []struct {
@@ -1065,9 +543,18 @@ type Pokemon struct {
 	Weight int64 `json:"weight"`
 }
 
-type VersionGameIndex struct {
-	GameIndex int64            `json:"game_index"`
-	Version   NamedApiResource `json:"version"`
+type MoveAilment1 struct {
+	ID    int64              `json:"id"`
+	Moves []NamedApiResource `json:"moves"`
+	Name  string             `json:"name"`
+	Names []Name             `json:"names"`
+}
+
+type MoveAilment struct {
+	ID    int64              `json:"id"`
+	Moves []NamedApiResource `json:"moves"`
+	Name  string             `json:"name"`
+	Names []Name             `json:"names"`
 }
 
 type MoveCategory struct {
@@ -1075,4 +562,517 @@ type MoveCategory struct {
 	ID           int64              `json:"id"`
 	Moves        []NamedApiResource `json:"moves"`
 	Name         string             `json:"name"`
+}
+
+type ApiResource struct {
+	URL string `json:"url"`
+}
+
+type PokemonSpecies struct {
+	BaseHappiness      *int64             `json:"base_happiness"`
+	CaptureRate        int64              `json:"capture_rate"`
+	Color              NamedApiResource   `json:"color"`
+	EggGroups          []NamedApiResource `json:"egg_groups"`
+	EvolutionChain     ApiResource        `json:"evolution_chain"`
+	EvolvesFromSpecies *NamedApiResource  `json:"evolves_from_species"`
+	FlavorTextEntries  []struct {
+		FlavorText string           `json:"flavor_text"`
+		Language   NamedApiResource `json:"language"`
+		Version    NamedApiResource `json:"version"`
+	} `json:"flavor_text_entries"`
+	FormDescriptions []Description `json:"form_descriptions"`
+	FormsSwitchable  bool          `json:"forms_switchable"`
+	GenderRate       int64         `json:"gender_rate"`
+	Genera           []struct {
+		Genus    string           `json:"genus"`
+		Language NamedApiResource `json:"language"`
+	} `json:"genera"`
+	Generation           NamedApiResource  `json:"generation"`
+	GrowthRate           NamedApiResource  `json:"growth_rate"`
+	Habitat              *NamedApiResource `json:"habitat"`
+	HasGenderDifferences bool              `json:"has_gender_differences"`
+	HatchCounter         *int64            `json:"hatch_counter"`
+	ID                   int64             `json:"id"`
+	IsBaby               bool              `json:"is_baby"`
+	IsLegendary          bool              `json:"is_legendary"`
+	IsMythical           bool              `json:"is_mythical"`
+	Name                 string            `json:"name"`
+	Names                []Name            `json:"names"`
+	Order                int64             `json:"order"`
+	PalParkEncounters    []struct {
+		Area      NamedApiResource `json:"area"`
+		BaseScore int64            `json:"base_score"`
+		Rate      int64            `json:"rate"`
+	} `json:"pal_park_encounters"`
+	PokedexNumbers []struct {
+		EntryNumber int64            `json:"entry_number"`
+		Pokedex     NamedApiResource `json:"pokedex"`
+	} `json:"pokedex_numbers"`
+	Shape     *NamedApiResource `json:"shape"`
+	Varieties []struct {
+		IsDefault bool             `json:"is_default"`
+		Pokemon   NamedApiResource `json:"pokemon"`
+	} `json:"varieties"`
+}
+
+type ItemCategory struct {
+	ID     int64              `json:"id"`
+	Items  []NamedApiResource `json:"items"`
+	Name   string             `json:"name"`
+	Names  []Name             `json:"names"`
+	Pocket NamedApiResource   `json:"pocket"`
+}
+
+type EvolutionChain struct {
+	BabyTriggerItem *NamedApiResource `json:"baby_trigger_item"`
+	Chain           struct {
+		EvolutionDetails []json.RawMessage `json:"evolution_details"`
+		EvolvesTo        []struct {
+			EvolutionDetails []struct {
+				Gender                *int64            `json:"gender"`
+				HeldItem              *NamedApiResource `json:"held_item"`
+				Item                  *NamedApiResource `json:"item"`
+				KnownMove             *NamedApiResource `json:"known_move"`
+				KnownMoveType         *NamedApiResource `json:"known_move_type"`
+				Location              *NamedApiResource `json:"location"`
+				MinAffection          *int64            `json:"min_affection"`
+				MinBeauty             *int64            `json:"min_beauty"`
+				MinHappiness          *int64            `json:"min_happiness"`
+				MinLevel              *int64            `json:"min_level"`
+				NeedsOverworldRain    bool              `json:"needs_overworld_rain"`
+				PartySpecies          *NamedApiResource `json:"party_species"`
+				PartyType             *NamedApiResource `json:"party_type"`
+				RelativePhysicalStats *int64            `json:"relative_physical_stats"`
+				TimeOfDay             string            `json:"time_of_day"`
+				TradeSpecies          *NamedApiResource `json:"trade_species"`
+				Trigger               NamedApiResource  `json:"trigger"`
+				TurnUpsideDown        bool              `json:"turn_upside_down"`
+			} `json:"evolution_details"`
+			EvolvesTo []struct {
+				EvolutionDetails []struct {
+					Gender                *int64            `json:"gender"`
+					HeldItem              *NamedApiResource `json:"held_item"`
+					Item                  *NamedApiResource `json:"item"`
+					KnownMove             *NamedApiResource `json:"known_move"`
+					KnownMoveType         struct{}          `json:"known_move_type"`
+					Location              *NamedApiResource `json:"location"`
+					MinAffection          struct{}          `json:"min_affection"`
+					MinBeauty             struct{}          `json:"min_beauty"`
+					MinHappiness          *int64            `json:"min_happiness"`
+					MinLevel              *int64            `json:"min_level"`
+					NeedsOverworldRain    bool              `json:"needs_overworld_rain"`
+					PartySpecies          struct{}          `json:"party_species"`
+					PartyType             struct{}          `json:"party_type"`
+					RelativePhysicalStats struct{}          `json:"relative_physical_stats"`
+					TimeOfDay             string            `json:"time_of_day"`
+					TradeSpecies          struct{}          `json:"trade_species"`
+					Trigger               NamedApiResource  `json:"trigger"`
+					TurnUpsideDown        bool              `json:"turn_upside_down"`
+				} `json:"evolution_details"`
+				EvolvesTo []json.RawMessage `json:"evolves_to"`
+				IsBaby    bool              `json:"is_baby"`
+				Species   NamedApiResource  `json:"species"`
+			} `json:"evolves_to"`
+			IsBaby  bool             `json:"is_baby"`
+			Species NamedApiResource `json:"species"`
+		} `json:"evolves_to"`
+		IsBaby  bool             `json:"is_baby"`
+		Species NamedApiResource `json:"species"`
+	} `json:"chain"`
+	ID int64 `json:"id"`
+}
+
+type FlavorText struct {
+	FlavorText string           `json:"flavor_text"`
+	Language   NamedApiResource `json:"language"`
+}
+
+type PokemonHabitat struct {
+	ID             int64              `json:"id"`
+	Name           string             `json:"name"`
+	Names          []Name             `json:"names"`
+	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
+}
+
+type Machine struct {
+	ID           int64            `json:"id"`
+	Item         NamedApiResource `json:"item"`
+	Move         NamedApiResource `json:"move"`
+	VersionGroup NamedApiResource `json:"version_group"`
+}
+
+type VersionEncounterDetail struct {
+	EncounterDetails []Encounter      `json:"encounter_details"`
+	MaxChance        int64            `json:"max_chance"`
+	Version          NamedApiResource `json:"version"`
+}
+
+type GenerationGameIndex struct {
+	GameIndex  int64            `json:"game_index"`
+	Generation NamedApiResource `json:"generation"`
+}
+
+type ContestEffect struct {
+	Appeal            int64        `json:"appeal"`
+	EffectEntries     []Effect     `json:"effect_entries"`
+	FlavorTextEntries []FlavorText `json:"flavor_text_entries"`
+	ID                int64        `json:"id"`
+	Jam               int64        `json:"jam"`
+}
+
+type V2 struct {
+	Ability                 string `json:"ability"`
+	Berry                   string `json:"berry"`
+	BerryFirmness           string `json:"berry-firmness"`
+	BerryFlavor             string `json:"berry-flavor"`
+	Characteristic          string `json:"characteristic"`
+	ContestEffect           string `json:"contest-effect"`
+	ContestType             string `json:"contest-type"`
+	EggGroup                string `json:"egg-group"`
+	EncounterCondition      string `json:"encounter-condition"`
+	EncounterConditionValue string `json:"encounter-condition-value"`
+	EncounterMethod         string `json:"encounter-method"`
+	EvolutionChain          string `json:"evolution-chain"`
+	EvolutionTrigger        string `json:"evolution-trigger"`
+	Gender                  string `json:"gender"`
+	Generation              string `json:"generation"`
+	GrowthRate              string `json:"growth-rate"`
+	Item                    string `json:"item"`
+	ItemAttribute           string `json:"item-attribute"`
+	ItemCategory            string `json:"item-category"`
+	ItemFlingEffect         string `json:"item-fling-effect"`
+	ItemPocket              string `json:"item-pocket"`
+	Language                string `json:"language"`
+	Location                string `json:"location"`
+	LocationArea            string `json:"location-area"`
+	Machine                 string `json:"machine"`
+	Move                    string `json:"move"`
+	MoveAilment             string `json:"move-ailment"`
+	MoveBattleStyle         string `json:"move-battle-style"`
+	MoveCategory            string `json:"move-category"`
+	MoveDamageClass         string `json:"move-damage-class"`
+	MoveLearnMethod         string `json:"move-learn-method"`
+	MoveTarget              string `json:"move-target"`
+	Nature                  string `json:"nature"`
+	PalParkArea             string `json:"pal-park-area"`
+	PokeathlonStat          string `json:"pokeathlon-stat"`
+	Pokedex                 string `json:"pokedex"`
+	Pokemon                 string `json:"pokemon"`
+	PokemonColor            string `json:"pokemon-color"`
+	PokemonForm             string `json:"pokemon-form"`
+	PokemonHabitat          string `json:"pokemon-habitat"`
+	PokemonShape            string `json:"pokemon-shape"`
+	PokemonSpecies          string `json:"pokemon-species"`
+	Region                  string `json:"region"`
+	Stat                    string `json:"stat"`
+	SuperContestEffect      string `json:"super-contest-effect"`
+	Type                    string `json:"type"`
+	Version                 string `json:"version"`
+	VersionGroup            string `json:"version-group"`
+}
+
+type PalParkArea struct {
+	ID                int64  `json:"id"`
+	Name              string `json:"name"`
+	Names             []Name `json:"names"`
+	PokemonEncounters []struct {
+		BaseScore      int64            `json:"base_score"`
+		PokemonSpecies NamedApiResource `json:"pokemon_species"`
+		Rate           int64            `json:"rate"`
+	} `json:"pokemon_encounters"`
+}
+
+type PokemonShape struct {
+	AwesomeNames []struct {
+		AwesomeName string           `json:"awesome_name"`
+		Language    NamedApiResource `json:"language"`
+	} `json:"awesome_names"`
+	ID             int64              `json:"id"`
+	Name           string             `json:"name"`
+	Names          []Name             `json:"names"`
+	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
+}
+
+type EggGroup struct {
+	ID             int64              `json:"id"`
+	Name           string             `json:"name"`
+	Names          []Name             `json:"names"`
+	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
+}
+
+type Berry struct {
+	Firmness NamedApiResource `json:"firmness"`
+	Flavors  []struct {
+		Flavor  NamedApiResource `json:"flavor"`
+		Potency int64            `json:"potency"`
+	} `json:"flavors"`
+	GrowthTime       int64            `json:"growth_time"`
+	ID               int64            `json:"id"`
+	Item             NamedApiResource `json:"item"`
+	MaxHarvest       int64            `json:"max_harvest"`
+	Name             string           `json:"name"`
+	NaturalGiftPower int64            `json:"natural_gift_power"`
+	NaturalGiftType  NamedApiResource `json:"natural_gift_type"`
+	Size             int64            `json:"size"`
+	Smoothness       int64            `json:"smoothness"`
+	SoilDryness      int64            `json:"soil_dryness"`
+}
+
+type ContestType struct {
+	BerryFlavor NamedApiResource `json:"berry_flavor"`
+	ID          int64            `json:"id"`
+	Name        string           `json:"name"`
+	Names       []struct {
+		Color    string           `json:"color"`
+		Language NamedApiResource `json:"language"`
+		Name     string           `json:"name"`
+	} `json:"names"`
+}
+
+type Effect struct {
+	Effect   string           `json:"effect"`
+	Language NamedApiResource `json:"language"`
+}
+
+type VersionGroupFlavorText struct {
+	Language     NamedApiResource `json:"language"`
+	Text         string           `json:"text"`
+	VersionGroup NamedApiResource `json:"version_group"`
+}
+
+type BerryFlavor struct {
+	Berries []struct {
+		Berry   NamedApiResource `json:"berry"`
+		Potency int64            `json:"potency"`
+	} `json:"berries"`
+	ContestType NamedApiResource `json:"contest_type"`
+	ID          int64            `json:"id"`
+	Name        string           `json:"name"`
+	Names       []Name           `json:"names"`
+}
+
+type Gender struct {
+	ID                    int64  `json:"id"`
+	Name                  string `json:"name"`
+	PokemonSpeciesDetails []struct {
+		PokemonSpecies NamedApiResource `json:"pokemon_species"`
+		Rate           int64            `json:"rate"`
+	} `json:"pokemon_species_details"`
+	RequiredForEvolution []NamedApiResource `json:"required_for_evolution"`
+}
+
+type MachineVersionDetail struct {
+	Machine      ApiResource      `json:"machine"`
+	VersionGroup NamedApiResource `json:"version_group"`
+}
+
+type Name struct {
+	Language NamedApiResource `json:"language"`
+	Name     string           `json:"name"`
+}
+
+type EncounterMethod struct {
+	ID    int64  `json:"id"`
+	Name  string `json:"name"`
+	Names []Name `json:"names"`
+	Order int64  `json:"order"`
+}
+
+type Encounter struct {
+	Chance          int64              `json:"chance"`
+	ConditionValues []NamedApiResource `json:"condition_values"`
+	MaxLevel        int64              `json:"max_level"`
+	Method          NamedApiResource   `json:"method"`
+	MinLevel        int64              `json:"min_level"`
+}
+
+type Location struct {
+	Areas       []NamedApiResource    `json:"areas"`
+	GameIndices []GenerationGameIndex `json:"game_indices"`
+	ID          int64                 `json:"id"`
+	Name        string                `json:"name"`
+	Names       []Name                `json:"names"`
+	Region      *NamedApiResource     `json:"region"`
+}
+
+type Language struct {
+	ID       int64  `json:"id"`
+	Iso3166  string `json:"iso3166"`
+	Iso639   string `json:"iso639"`
+	Name     string `json:"name"`
+	Names    []Name `json:"names"`
+	Official bool   `json:"official"`
+}
+
+type Description struct {
+	Description string           `json:"description"`
+	Language    NamedApiResource `json:"language"`
+}
+
+type LocationArea struct {
+	EncounterMethodRates []struct {
+		EncounterMethod NamedApiResource `json:"encounter_method"`
+		VersionDetails  []struct {
+			Rate    int64            `json:"rate"`
+			Version NamedApiResource `json:"version"`
+		} `json:"version_details"`
+	} `json:"encounter_method_rates"`
+	GameIndex         int64            `json:"game_index"`
+	ID                int64            `json:"id"`
+	Location          NamedApiResource `json:"location"`
+	Name              string           `json:"name"`
+	Names             []Name           `json:"names"`
+	PokemonEncounters []struct {
+		Pokemon        NamedApiResource         `json:"pokemon"`
+		VersionDetails []VersionEncounterDetail `json:"version_details"`
+	} `json:"pokemon_encounters"`
+}
+
+type SuperContestEffect struct {
+	Appeal            int64              `json:"appeal"`
+	FlavorTextEntries []FlavorText       `json:"flavor_text_entries"`
+	ID                int64              `json:"id"`
+	Moves             []NamedApiResource `json:"moves"`
+}
+
+type ItemPocket struct {
+	Categories []NamedApiResource `json:"categories"`
+	ID         int64              `json:"id"`
+	Name       string             `json:"name"`
+	Names      []Name             `json:"names"`
+}
+
+type Ability struct {
+	EffectChanges []struct {
+		EffectEntries []Effect         `json:"effect_entries"`
+		VersionGroup  NamedApiResource `json:"version_group"`
+	} `json:"effect_changes"`
+	EffectEntries     []VerboseEffect `json:"effect_entries"`
+	FlavorTextEntries []struct {
+		FlavorText   string           `json:"flavor_text"`
+		Language     NamedApiResource `json:"language"`
+		VersionGroup NamedApiResource `json:"version_group"`
+	} `json:"flavor_text_entries"`
+	Generation   NamedApiResource `json:"generation"`
+	ID           int64            `json:"id"`
+	IsMainSeries bool             `json:"is_main_series"`
+	Name         string           `json:"name"`
+	Names        []Name           `json:"names"`
+	Pokemon      []struct {
+		IsHidden bool             `json:"is_hidden"`
+		Pokemon  NamedApiResource `json:"pokemon"`
+		Slot     int64            `json:"slot"`
+	} `json:"pokemon"`
+}
+
+type Item struct {
+	Attributes        []NamedApiResource       `json:"attributes"`
+	BabyTriggerFor    *ApiResource             `json:"baby_trigger_for"`
+	Category          NamedApiResource         `json:"category"`
+	Cost              int64                    `json:"cost"`
+	EffectEntries     []VerboseEffect          `json:"effect_entries"`
+	FlavorTextEntries []VersionGroupFlavorText `json:"flavor_text_entries"`
+	FlingEffect       *NamedApiResource        `json:"fling_effect"`
+	FlingPower        *int64                   `json:"fling_power"`
+	GameIndices       []GenerationGameIndex    `json:"game_indices"`
+	HeldByPokemon     []struct {
+		Pokemon        NamedApiResource `json:"pokemon"`
+		VersionDetails []struct {
+			Rarity  int64            `json:"rarity"`
+			Version NamedApiResource `json:"version"`
+		} `json:"version_details"`
+	} `json:"held_by_pokemon"`
+	ID       int64                  `json:"id"`
+	Machines []MachineVersionDetail `json:"machines"`
+	Name     string                 `json:"name"`
+	Names    []Name                 `json:"names"`
+	Sprites  struct {
+		Default *string `json:"default"`
+	} `json:"sprites"`
+}
+
+type NamedApiResource struct {
+	Name string `json:"name"`
+	URL  string `json:"url"`
+}
+
+type VerboseEffect struct {
+	Effect      string           `json:"effect"`
+	Language    NamedApiResource `json:"language"`
+	ShortEffect string           `json:"short_effect"`
+}
+
+type Pokedex struct {
+	Descriptions   []Description `json:"descriptions"`
+	ID             int64         `json:"id"`
+	IsMainSeries   bool          `json:"is_main_series"`
+	Name           string        `json:"name"`
+	Names          []Name        `json:"names"`
+	PokemonEntries []struct {
+		EntryNumber    int64            `json:"entry_number"`
+		PokemonSpecies NamedApiResource `json:"pokemon_species"`
+	} `json:"pokemon_entries"`
+	Region        *NamedApiResource  `json:"region"`
+	VersionGroups []NamedApiResource `json:"version_groups"`
+}
+
+type VersionGroup struct {
+	Generation       NamedApiResource   `json:"generation"`
+	ID               int64              `json:"id"`
+	MoveLearnMethods []NamedApiResource `json:"move_learn_methods"`
+	Name             string             `json:"name"`
+	Order            int64              `json:"order"`
+	Pokedexes        []NamedApiResource `json:"pokedexes"`
+	Regions          []NamedApiResource `json:"regions"`
+	Versions         []NamedApiResource `json:"versions"`
+}
+
+type Generation struct {
+	Abilities      []NamedApiResource `json:"abilities"`
+	ID             int64              `json:"id"`
+	MainRegion     NamedApiResource   `json:"main_region"`
+	Moves          []NamedApiResource `json:"moves"`
+	Name           string             `json:"name"`
+	Names          []Name             `json:"names"`
+	PokemonSpecies []NamedApiResource `json:"pokemon_species"`
+	Types          []NamedApiResource `json:"types"`
+	VersionGroups  []NamedApiResource `json:"version_groups"`
+}
+
+type ItemFlingEffect struct {
+	EffectEntries []Effect           `json:"effect_entries"`
+	ID            int64              `json:"id"`
+	Items         []NamedApiResource `json:"items"`
+	Name          string             `json:"name"`
+}
+
+type Stat struct {
+	AffectingMoves struct {
+		Decrease []struct {
+			Change int64            `json:"change"`
+			Move   NamedApiResource `json:"move"`
+		} `json:"decrease"`
+		Increase []struct {
+			Change int64            `json:"change"`
+			Move   NamedApiResource `json:"move"`
+		} `json:"increase"`
+	} `json:"affecting_moves"`
+	AffectingNatures struct {
+		Decrease []NamedApiResource `json:"decrease"`
+		Increase []NamedApiResource `json:"increase"`
+	} `json:"affecting_natures"`
+	Characteristics []ApiResource     `json:"characteristics"`
+	GameIndex       int64             `json:"game_index"`
+	ID              int64             `json:"id"`
+	IsBattleOnly    bool              `json:"is_battle_only"`
+	MoveDamageClass *NamedApiResource `json:"move_damage_class"`
+	Name            string            `json:"name"`
+	Names           []Name            `json:"names"`
+}
+
+type ApiResourceList struct {
+	Count    int64         `json:"count"`
+	Next     *string       `json:"next"`
+	Previous *string       `json:"previous"`
+	Results  []ApiResource `json:"results"`
 }
